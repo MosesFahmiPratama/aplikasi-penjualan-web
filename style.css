@@ -1,0 +1,562 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	font-family: 'times new roman', sans-serif;
+	background-color: rgba(220,220,220);
+}
+
+.container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.navbar {
+	display: flex;
+	background-color: rgba(220,220,220);
+	position: absolute;
+	justify-content: space-between;
+	box-shadow: -5px -5px 10px 0 rgba(255,255,255,0.5),
+				5px 5px 10px 0 rgba(0,0,0,0.2);
+	width: 100%;
+	height: 70px;
+}
+
+.logo img {
+	width: 100px;
+	height: 50px;
+	border: 3px solid darkolivegreen;
+	border-radius: 10px;
+	margin: 5px 0 20px 80px;
+	box-shadow: -8px -8px 20px 0 rgba(255,255,255,0.7),
+				8px 8px 20px 0 rgba(0,0,0,0.2);
+}
+
+.navbar nav ul li {
+	display: inline-block;
+	margin: 10px;
+	padding: 10px 20px ;
+	box-shadow: -7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.navbar nav ul li:hover {
+	text-shadow: 0 0 10px #81f86d,0 0 20px #81f86d;
+	box-shadow: inset -7px -7px 20px 0 rgba(255,255,255,0.7),
+				inset 7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.navbar nav ul li a {
+	text-transform: uppercase;
+	text-decoration: none;
+	color: darkolivegreen;
+}
+
+.sidebar {
+	box-shadow: -5px -5px 10px 0 rgba(255,255,255,0.5),
+				5px 5px 10px 0 rgba(0,0,0,0.2);
+	width: 20%;
+	height: 100vh;
+}
+
+.sidebar ul span {
+	text-align: center;
+	padding: 20px;
+}
+
+.sidebar ul {
+	margin-top: 80px;
+}
+
+.sidebar ul li {
+	margin: 0 10px 10px 10px;
+	padding: 10px;
+	list-style: none;
+	box-shadow: -7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.sidebar ul li a {
+	margin: 10px;
+	text-decoration: none;
+	font-size: 20px;
+	color: darkolivegreen;
+}
+
+.sidebar ul li a:hover {
+	font-size: 19px;
+}
+
+.sidebar ul li:hover {
+	box-shadow: inset -7px -7px 20px 0 rgba(255,255,255,0.7),
+				inset 7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+h1 {
+	color: darkolivegreen;
+	margin-top: 10px;
+	text-shadow: -8px -8px 12px #fff,
+				8px 8px 12px rgba(0,0,0,0.2);
+}
+
+.konten #notifikasi {
+	display: none;
+	transform: translateY(-20px);
+	position: absolute;
+	z-index: 2;
+	border-radius: 10px;
+	right: 10px;
+	background-color: rgba(220,220,220);
+	box-shadow: -7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.konten #notifikasi h2,
+.konten #notifikasi p {
+	transform: translateY(-40px);
+}
+
+#tutup-notifikasi {
+	border-radius: 10px;
+	margin: 5px;
+	width: 30px;
+	padding: 10px;
+	transform: translate(160px, -10px);
+	background-color: rgba(220,220,220);
+	box-shadow: -7px -7px 20px 0 rgba(255,255,255,0.7),
+			 	7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+#tutup-notifikasi:hover {
+	box-shadow: inset -7px -7px 20px 0 rgba(255,255,255,0.7),
+			   inset 7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+#konten-notifikasi {
+	margin: 10px;
+	width: 190px;
+}
+
+.konten {
+	padding: 10px 0 0 10px;
+	width: 80%;
+	margin-top: 70px;
+}
+
+.kartu {
+	display: flex;
+	justify-content: center;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	margin: 20px 10px;
+	border-radius: 10px;
+	text-align: center;
+	height: 140px;
+	width: 180px;
+	box-shadow: -7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.konten .kartu .card h3 {
+	color: #e7e5e5;
+	border-radius: 10px 10px;
+	box-shadow: -7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.konten .kartu .card h3:hover {
+	color: #fff;
+}
+
+.konten .kartu .card p{
+	background-size: cover;
+	font-size: 7em;
+	transform: scale(1);
+	text-align: center;
+	position: relative;
+	width: 100%;
+	opacity: 0.1;
+}
+
+.konten .kartu .card p:hover {
+	color: #fff;
+}
+
+.konten .kartu .card .hasil {
+	top: -50%;
+	position: relative;
+	font-size: 2em;
+	text-shadow: -6px -6px 10px #fff,
+				6px 6px 10px rgba(0,0,0,0.2);
+}
+
+.konten .card-grafik {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.konten .card-grafik #grafik {
+	width: 400px;
+	height: 300px;
+	margin: 20px;
+	border-radius: 20px;
+	padding: 20px;
+	box-shadow: -7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.tombol-menu {
+	display: none;
+}
+
+.Pendapatan:hover {
+	background: linear-gradient(130deg,#fd0c0c,#fbc9c9);
+	color: white;
+}
+.Bmasuk:hover {
+	background: linear-gradient(130deg,#2508ff,#b6b0ff);
+	color: white;
+}.Bkeluar:hover {
+	background: linear-gradient(130deg,#08f9fc,#adfafb);
+	color: white;
+}.Pengeluaran:hover {
+	background: linear-gradient(130deg,#18fb0d,#c4f8bb);
+	color: white;
+}
+
+/*style tombol hapus transaksi Penjualan*/
+.hapus-transaksi-penjualan {
+	transform: translate(300px, -180px);
+	background-color: #fd0c0c;
+	padding: 10px;
+	text-decoration: none;
+	border-radius: 10px;
+	color: #fff;
+	box-shadow: -7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.tabel {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+table {
+	margin-top: 30px;
+	text-align: center;
+	border-collapse: collapse;
+	color: darkolivegreen;
+	width: 70%;
+	height: 50%;
+	font-size: 16px;
+	box-shadow:-7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+table thead {
+	border: 1px solid #c0bebe;
+	border-radius: 15px;
+	box-shadow:-7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+table thead th {
+	padding: 10px;
+	background-color: #ededed;
+}
+
+table tbody td {
+	padding: 10px;
+	border-bottom: 1px solid #c0bebe;
+}
+
+.form-laporan {
+	padding: 0 10px;
+	display: flex;
+	justify-content: space-around;
+	bottom: -50px;
+}
+
+.form-laporan .form-cari {
+	width: auto;
+	padding: 10px;
+	height: 40px;
+	box-shadow:-7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.form-input {
+	display: flex;
+	justify-content: center;
+	margin: 10px;
+	padding: 10px;
+	box-shadow:-7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.form-input .form-input-penjualan {
+	display: flex;
+	width: 400px;
+	flex-direction: column;
+	padding: 20px;
+	box-shadow:-7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.form-input .form-input-penjualan label {
+	margin-top: 10px;
+}
+
+.form-input .form-input-penjualan #tombol-form {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.form-input .form-input-penjualan #tombol-form button[type='submit'] {
+	background-color: #0bda15;
+	margin: 5px;
+	outline: none;
+	padding: 10px;
+	border-radius: 9px;
+	border: none;
+	color: #fff;
+	box-shadow:-7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.form-input .form-input-penjualan #tombol-form button[type='reset'] {
+	background-color: #fc2424;
+	margin: 5px;
+	outline: none;
+	padding: 10px;
+	border-radius: 9px;
+	border: none;
+	color: #fff;
+	box-shadow: 7px -7px 20px 0 rgba(255,255,255,0.7),
+				 7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.form-input .form-input-penjualan #tombol-form button[type='submit']:hover ,
+.form-input .form-input-penjualan #tombol-form button[type='reset']:hover {
+	box-shadow: inset -7px -7px 20px 0 rgba(255,255,255,0.7),
+				inset 7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.form-input .form-input-penjualan input[type='text'],
+.form-input .form-input-penjualan input[type='date'],
+.form-input .form-input-penjualan input[type='number'],
+.form-input .form-input-penjualan select {
+	outline: none;
+	border: none;
+	height: 25px;
+	text-align: center;
+	border-radius: 5px;
+	box-shadow:-7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.cetak {
+	display: block;
+}
+
+.dropdown {
+	padding: 10px 15px;
+	text-align: center;
+	border: none;
+	background-color: rgba(220,220,220);
+	width: 60px;
+	box-shadow:-7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.dropdown-konten {
+	position: absolute;
+	display: none;
+	width: 70px;
+	box-shadow: -7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.cetak:hover > .dropdown-konten {
+	display: block;
+	border-radius: 10px;
+	background-color: #afabab;
+	box-shadow:-7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.dropdown-konten > a {
+	display: block;
+	padding: 10px;
+	text-decoration: none;
+	color: black;
+	box-shadow:-7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.dropdown-konten > a:hover {
+	color: white;
+	background-color: #928f8f;
+}
+
+/*css untuk mengatur tampilan login aplikasi*/
+.form-login {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+
+.form-login form {
+	margin-top: 40px;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	width: 400px;
+	height: 500px;
+	box-shadow:-7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.form-login form h1,
+.form-login form label,
+.form-login form input {
+	margin: 10px 0;
+}
+
+.form-login form input {
+	outline: none;
+	height: 30px;
+	border: none;
+	border-radius: 10px;
+}
+
+.form-login form #tombol-simpan {
+	text-align: center;
+	margin: 10px;
+}
+
+.form-login form #tombol-simpan button[type='submit'],
+.form-login form #tombol-simpan button[type='reset'] {
+	padding: 10px 20px;
+	margin: 10px;
+	outline: none;
+	border-radius: 10px;
+	border: none;
+	color: #efefef;
+	box-shadow:-7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
+.form-login form #tombol-simpan button[type='submit'] {
+	background-color: #12f93d;
+}
+
+.form-login form #tombol-simpan button[type='reset'] {
+	background-color: #fe1d1d;
+}
+
+@media (max-width: 768px) {
+	.navbar {
+		display: flex;
+		position: fixed;
+		z-index: 1;
+	}
+	h1 {
+		font-size: 19px;
+	}
+	.navbar nav ul li {
+		font-size: 12px;
+		margin: 15px 5px 0 5px;
+		padding: 10px;
+	}
+	.logo img {
+		margin-left: 10px;
+	}
+	.card {
+		width: 90%;
+		height: 70%;
+	}
+	.sidebar {
+		display: none;
+	}
+	.sidebar.active {
+		display: block;
+		position: fixed;
+		width: 100%;
+		box-shadow:-7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+		background-color: rgba(220,220,220)
+	}
+	.sidebar.active ul {
+		display: block;
+		transition-duration: 2s;
+	}
+	.konten,.kartu {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.form-input {
+		display: flex;
+		flex-direction: column;
+	}
+	.form-input .form-input-penjualan {
+		width: 100%;
+	}
+	.tabel {
+		width: 100%;
+		overflow: auto;
+	}
+	table {
+		width: 100%;
+	}
+	th, td {
+		padding: 10px;
+	}
+	.konten .kartu .card i {
+		top: -50%;
+	}
+	.konten .kartu .card .hasil {
+		transform:translateY(-100px);
+		font-size: 3em;
+	}
+	.tombol-menu {
+		color: darkolivegreen;
+		margin: 15px 0 0 0;
+		width: 35px;
+		height: 35px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		box-shadow: -7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+	}
+	.sidebar .tombol-menu {
+		float: right;
+		margin: 10px;
+	}
+	h1 {
+		margin-top: 20px;
+		text-align: left;
+	}
+	.form-login form {
+		width: 300px;
+		height: 400px;
+	}
+}
