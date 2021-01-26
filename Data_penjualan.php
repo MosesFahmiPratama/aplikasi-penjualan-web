@@ -52,9 +52,9 @@
  				</div>
  			</div>
  			<div class="form-laporan">
- 				<form action="" class="form-cari">
+ 				<form action="Ajax/proses/ajax_search_data_penjualan.php" class="form-cari">
  					<label><i class="fas fa-search"></i></label>
- 					<input type="text">
+ 					<input type="text" name="kata_cari" id="kata_cari">
  				</form>
  				<div class="cetak">
  					<button class="dropdown">Cetak</button>
@@ -64,57 +64,71 @@
  					</div>
  				</div>
  			</div>
- 			<div class="tabel">
+ 			<div id="tampil_data">
+ 			 <div class="tabel">
 	 			<table>
-		 				<thead>
-		 					<th>No</th>
-		 					<th>umur</th>
-		 					<th>Nama Lengkap</th>
-		 					<th>Alamat</th>
-		 					<th colspan="2">Aksi</th>
-		 				</thead>
-		 				<tbody>
-		 					<tr>
-			 					<td>1</td>
-			 					<td>Moses</td>
-			 					<td>Senakin</td>
-			 					<td>1 januari 2003</td>
-			 					<td><a href="#" id="edit">Edit</a></td>
-			 					<td><a href="#" id="hapus">Hapus</a></td>
-		 					</tr>
-		 					<tr>
-			 					<td>2</td>
-			 					<td>Mila</td>
-			 					<td>Karangan</td>
-			 					<td>2 januari 2004</td>
-			 					<td><a href="#">Edit</a></td>
-			 					<td><a href="#">Hapus</a></td>
-		 					</tr><tr>
-			 					<td>3</td>
-			 					<td>Tina</td>
-			 					<td>Menjalin</td>
-			 					<td>5 februari 2005</td>
-			 					<td><a href="#">Edit</a></td>
-			 					<td><a href="#">Hapus</a></td>
-		 					</tr><tr>
-			 					<td>4</td>
-			 					<td>Justin</td>
-			 					<td>Ngabang</td>
-			 					<td>6 januari 2001</td>
-			 					<td><a href="#">Edit</a></td>
-			 					<td><a href="#">Hapus</a></td>
-		 					</tr><tr>
-			 					<td>5</td>
-			 					<td>Jo</td>
-			 					<td>Pontinak</td>
-			 					<td>7 Maret 2002</td>
-			 					<td><a href="#">Edit</a></td>
-			 					<td><a href="#">Hapus</a></td>
-		 					</tr>
-		 				</tbody>
-	 			</table>
-	
-	 		</div>
+			      <thead>
+			        <th>Tanggal Penjualan</th>
+					<th>Kode Barang</th>
+					<th>Nama Barang</th>
+					<th>Kategori</th>
+					<th>Harga Per Barang</th>
+					<th>Jumlah Pelanggan Beli</th>
+					<th>Total Harga</th>
+			        <th>Aksi</th>
+			      </thead>
+			      <tbody>
+	 				<?php 
+	 				  include "koneksi.php";
+
+	 				  $halaman = 10;
+		              $page = isset($_GET["halaman"]) ? (int)$_GET["halaman"] : 1;
+		              $mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
+
+		              $sebelum = $page - 1;
+		              $sesudah = $page + 1;
+
+		              $result = mysqli_query($koneksi,"SELECT * FROM tbl_penjualan");
+		              $total = mysqli_num_rows($result);
+		              $pages = ceil($total/$halaman);            
+		              $query = mysqli_query($koneksi,"SELECT * FROM tbl_penjualan LIMIT $mulai, $halaman")or die(mysqli_error);
+		              $no =$mulai+1;
+	 
+	 			      while ($tampil = mysqli_fetch_array($query)) {
+	                ?>
+	                <tr>
+	                    <td><?php echo $tampil['tanggal_penjualan']; ?></td>
+	                    <td><?php echo $tampil['kd_barang']; ?></td>
+	                    <td><?php echo $tampil['nm_barang']; ?></td>
+	                    <td><?php echo $tampil['kategori']; ?></td>
+	                    <td><?php echo "Rp. ".number_format($tampil['harga'])." ,-"; ?></td>
+	                    <td><?php echo $tampil['jumlah']; ?></td>
+	                    <td><?php echo $tampil['total_harga']; ?></td>
+	                </tr>
+	                <?php 
+	                }
+	                ?>
+				    </tbody>
+				</table>
+				</div>
+				<nav class="pagination">
+				     <ul>
+				         <li>
+				             <a  <?php if ($page > 1) {echo "href='?halaman=$sebelum'";} ?>> < </a>
+				         </li>
+				         <?php for ($i=1; $i<=$pages ; $i++){ ?>
+				              <li><a style="text-decoration: none; color: darkolivegreen;" href="?halaman=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+				                           
+				          <?php 
+				              } 
+				          ?>
+				         <li>
+				             <a  <?php if ($page < $pages) {echo "href='?halaman=$sesudah'";} ?>> > </a>
+				         </li>
+				     </ul>
+				 </nav>  
+			  
+ 			</div>
  		</div>
  	</div>
  	<script type="text/javascript" src="aset/css/all.min.js"></script>
@@ -132,6 +146,11 @@
  		$('#tutup-notifikasi').click(function(){
  			$('#notifikasi').css('display','none')
  		})
+
+ 		$('#kata_cari').on('keyup', function(){
+
+		    $('#tampil_data').load('Ajax/proses/ajax_search_data_penjualan.php?nama=' + $('#kata_cari').val());
+		})
  	})
  </script>
  </body>

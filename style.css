@@ -8,7 +8,7 @@ body {
 	margin: 0;
 	padding: 0;
 	min-height: 100vh;
-	font-family: 'times new roman', sans-serif;
+	font-family: 'montserrat', sans-serif;
 	background-color: rgba(220,220,220);
 }
 
@@ -40,6 +40,8 @@ body {
 
 .navbar nav ul li {
 	display: inline-block;
+	color: darkolivegreen;
+	font-size: 1.3em;
 	margin: 10px;
 	padding: 10px 20px ;
 	box-shadow: -7px -7px 20px 0 rgba(255,255,255,0.7),
@@ -117,6 +119,21 @@ h1 {
 				7px 7px 20px 0 rgba(0,0,0,0.2);
 }
 
+#angka_notifikasi {
+	font-size: 12px;
+	transform: translate(30px, 40px);
+	border-radius: 50%;
+	color: #6d6c6c;
+	position: relative;
+	top: -10px;
+	left: -10px;
+	background-color: #f5f3f3;
+	z-index: 1;
+	padding: 2px;
+	box-shadow: -7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+}
+
 .konten #notifikasi h2,
 .konten #notifikasi p {
 	transform: translateY(-40px);
@@ -168,7 +185,7 @@ h1 {
 }
 
 .konten .kartu .card h3 {
-	color: #e7e5e5;
+	color: #717171;
 	border-radius: 10px 10px;
 	box-shadow: -7px -7px 20px 0 rgba(255,255,255,0.7),
 				7px 7px 20px 0 rgba(0,0,0,0.2);
@@ -194,6 +211,7 @@ h1 {
 
 .konten .kartu .card .hasil {
 	top: -50%;
+	color: #717171;
 	position: relative;
 	font-size: 2em;
 	text-shadow: -6px -6px 10px #fff,
@@ -230,7 +248,7 @@ h1 {
 	background: linear-gradient(130deg,#2508ff,#b6b0ff);
 	color: white;
 }.Bkeluar:hover {
-	background: linear-gradient(130deg,#08f9fc,#adfafb);
+	background: linear-gradient(130deg,#b219ff,#dd19ff);
 	color: white;
 }.Pengeluaran:hover {
 	background: linear-gradient(130deg,#18fb0d,#c4f8bb);
@@ -284,6 +302,30 @@ table tbody td {
 	border-bottom: 1px solid #c0bebe;
 }
 
+.pagination ul li {
+	display: inline-block;
+	position: relative;
+	left: 40%;
+	list-style: none;
+	font-family: "times new roman", sans-serif;
+	padding: 10px;
+	background-color: #cecdcd;
+	margin-left: 15px;
+	margin-top: 10px;
+	font-size: 20px;
+	color:#fff;
+	border-radius: 15px;
+	box-shadow:-7px -7px 20px 0 rgba(255,255,255,0.7),
+				7px 7px 20px 0 rgba(0,0,0,0.2);
+	text-shadow: -8px -8px 12px #fff,
+				8px 8px 12px rgba(0,0,0,0.2);
+}
+
+.pagination ul li:hover {
+	box-shadow: inset 7px 7px 20px 0 rgba(255,255,255,0.7),
+				inset -7px -7px 20px 0 rgba(0,0,0,0.2);
+}
+
 .form-laporan {
 	padding: 0 10px;
 	display: flex;
@@ -327,33 +369,35 @@ table tbody td {
 }
 
 .form-input .form-input-penjualan #tombol-form button[type='submit'] {
-	background-color: #0bda15;
+	background-color: #cecdcd;
 	margin: 5px;
 	outline: none;
 	padding: 10px;
 	border-radius: 9px;
 	border: none;
-	color: #fff;
+	color: #717171;
 	box-shadow:-7px -7px 20px 0 rgba(255,255,255,0.7),
 				7px 7px 20px 0 rgba(0,0,0,0.2);
 }
 
 .form-input .form-input-penjualan #tombol-form button[type='reset'] {
-	background-color: #fc2424;
+	background-color: #cecdcd;
 	margin: 5px;
 	outline: none;
 	padding: 10px;
 	border-radius: 9px;
 	border: none;
-	color: #fff;
+	color: #717171;
 	box-shadow: 7px -7px 20px 0 rgba(255,255,255,0.7),
 				 7px 7px 20px 0 rgba(0,0,0,0.2);
 }
 
 .form-input .form-input-penjualan #tombol-form button[type='submit']:hover ,
 .form-input .form-input-penjualan #tombol-form button[type='reset']:hover {
-	box-shadow: inset -7px -7px 20px 0 rgba(255,255,255,0.7),
-				inset 7px 7px 20px 0 rgba(0,0,0,0.2);
+	box-shadow:inset 7px 7px 20px 0 rgba(255,255,255,0.7),
+				inset -7px -7px 20px 0 rgba(0,0,0,0.2);
+	text-shadow: -8px -8px 12px #fff,
+				8px 8px 12px rgba(0,0,0,0.2);
 }
 
 .form-input .form-input-penjualan input[type='text'],
@@ -464,7 +508,7 @@ table tbody td {
 }
 
 .form-login form #tombol-simpan button[type='submit'] {
-	background-color: #12f93d;
+	background-color: #05c629;
 }
 
 .form-login form #tombol-simpan button[type='reset'] {
@@ -522,6 +566,7 @@ table tbody td {
 	.tabel {
 		width: 100%;
 		overflow: auto;
+		font-size: 11px;
 	}
 	table {
 		width: 100%;
@@ -558,5 +603,8 @@ table tbody td {
 	.form-login form {
 		width: 300px;
 		height: 400px;
+	}
+	.pagination ul li {
+		left: 30%;
 	}
 }

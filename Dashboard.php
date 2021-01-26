@@ -22,7 +22,7 @@ include "koneksi.php";
  			<h1>Dashboard</h1>
  			<nav>
  				<ul>
- 					<li id="tombol-notifikasi"><a href="#"><i class="fas fa-bell"></i></a></li>
+ 					<li id="tombol-notifikasi"><i class="fas fa-bell"></i><b id="angka_notifikasi"></b></li>
  					<li><a href="#"><i class="fas fa-cog"></i></a></li>
  					<li><a href="#"><i class="fas fa-sign-out-alt"></i></a></li>
  				</ul>
@@ -155,7 +155,15 @@ include "koneksi.php";
  		$('#tutup-notifikasi').click(function(){
  			$('#notifikasi').css('display','none')
  		})
+
+ 		ambilAngkaNotifikasi();
  	})
+
+ 	function ambilAngkaNotifikasi(){
+		$.get('Ajax/Ajax_notifikasi.php',function(data) {
+			$('#angka_notifikasi').html(data);
+		})
+	}
  </script>
  </body>
 </html>

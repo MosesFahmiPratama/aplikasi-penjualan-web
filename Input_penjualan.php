@@ -19,7 +19,7 @@
  			<h1>Form Penjualan</h1>
  			<nav>
  				<ul>
- 					<li id="tombol-notifikasi"><a href="#"><i class="fas fa-bell"></i></a></li>
+ 					<li id="tombol-notifikasi"><i class="fas fa-bell"></i><b id="angka_notifikasi"></b></li>
  					<li><a href="#"><i class="fas fa-cog"></i></a></li>
  					<li><a href="#"><i class="fas fa-sign-out-alt"></i></a></li>
  				</ul>
@@ -51,9 +51,9 @@
  			</div>
  			<!-- batas menu notifikasi -->
  			<div class="form-input">
- 				<form action="" class="form-input-penjualan">
+ 				<form action="Proses/proses-penjualan.php" method="post" class="form-input-penjualan">
  					<label>Tanggal</label>
- 					<input type="date">
+ 					<input type="date" name="tanggal_jual">
  					<label>Kode Barang</label>
  					 <select name="kode_barang" onchange="cek_database()" id="kode-barang">
                   	 <option>- - Pilih - -</option>
@@ -68,62 +68,31 @@
                      ?>               
                     </select>
  					<label>Nama Barang</label>
- 					<input type="text" id="nama_barang">
+ 					<input type="text" name="nama_barang" id="nama_barang">
  					<label>Kategori</label>
- 					<input type="text" id="kategori">
+ 					<input type="text" name="kategori" id="kategori">
  					<label>Harga Per Barang</label>
- 					<input type="text" id="harga">
+ 					<input type="text" name="harga" id="harga">
  					<label>Jumlah Pelanggan Beli</label>
- 					<input type="text" id="jumlah_pelanggan_beli" onkeyup="hitung()">
+ 					<input type="text" name="jumlah_jual" id="jumlah_pelanggan_beli" onkeyup="hitung()">
  					<label>Total Harga Pelanggan Beli</label>
- 					<input type="text" id="total_harga">
+ 					<input type="text" name="total_jual" id="total_harga">
  					
  					<div id="tombol-form">
- 						<button type="submit" name="simpan"><i class="fas fa-save"></i> Simpan</button>
+ 						<button type="submit" onclick="TambahDataPenjualan()"><i class="fas fa-save"></i> Simpan</button>
  						<button type="reset"><i class="fas fa-times"></i> Batal</button>
  					</div>
 
- 					<label>Total Bayar</label><?php 
-							                    $total = mysqli_query($koneksi,"SELECT SUM(total_harga) AS total_bayar FROM transaksi_penjualan");
-							                    $hasil = $total->fetch_array();
-							                    echo "<h1 style='color: red;'>Rp". number_format($hasil['total_bayar'],2,',','.')."</h1>";
-                 							  ?>
+ 					<p><h4>Total Bayar: </h3>
+ 					<h4 id="tampilkan_total_bayar"></h4></p>
  				</form>
  				
 	 			<div class="tabel">
 	 				<a class="hapus-transaksi-penjualan" href="Proses/hapus-transaksi-penjualan.php" onclick="return confirm('Apakah anda yakin mau menghapus data ini?')">Hapus</a>
-		 			<table>
-			 				<thead>
-			 					<tr>
-			 						<th>Tanggal Penjualan</th>
-				 					<th>Kode Barang</th>
-				 					<th>Nama Barang</th>
-				 					<th>Kategori</th>
-				 					<th>Harga Per Barang</th>
-				 					<th>Jumlah Pelanggan Beli</th>
-				 					<th>Total Harga</th>
-			 					</tr>
-			 				</thead>
-			 				<tbody>
-			 					 <?php 
-						            $penjualan = mysqli_query($koneksi,"SELECT * FROM transaksi_penjualan");
-						            while($b = mysqli_fetch_array($penjualan)){
-						         ?>
-						                <tr>
-						                    <td><?php echo $b['tanggal_penjualan']; ?></td>
-						                    <td><?php echo $b['kode_barang']; ?></td>
-						                    <td><?php echo $b['nama_barang']; ?></td>
-						                    <td><?php echo $b['kategori']; ?></td>
-						                    <td><?php echo "Rp. ".number_format($b['harga'])." ,-"; ?></td>
-						                    <td><?php echo $b['jumlah']; ?></td>
-						                    <td><?php echo $b['total_harga']; ?></td>
-						                </tr>
-						        
-						         <?php 
-						            }
-						         ?>
-			 				</tbody>
-		 			</table>
+		 			
+		 			<!-- Tampilkan data setelah diinput dan diproses melalui ajax -->
+		 			<div id="tampilkan_data"></div>
+
 		 		</div>
  		</div>
  	</div>
@@ -142,7 +111,50 @@
  		$('#tutup-notifikasi').click(function(){
  			$('#notifikasi').css('display','none')
  		})
+
+ 		ambilAngkaNotifikasi();
+
+ 		TotalBayarPenjualan();
+
+ 		loadDataPenjualan();
+
  	})
+ 	function TambahDataPenjualan(){
+ 		$('form').on('submit',function(e){
+			e.preventDefault();
+			$.ajax({
+				type: $(this).attr('method'),
+				url : $(this).attr('action'),
+				data: $(this).serialize(),
+				success:function(tangkap_data){
+					var tampil_data = JSON.parse(tangkap_data);
+					alert(tampil_data.pesan);
+					loadDataPenjualan();
+					TotalBayarPenjualan();
+				}
+			})
+		})
+ 	}
+
+ 	function loadDataPenjualan(){
+		$.get('Ajax/proses/ajax_ambil_data_penjualan.php',function(data) {
+			$('#tampilkan_data').html(data);
+		})
+	}
+
+	function TotalBayarPenjualan(){
+		$.get('Ajax/proses/ajax_menjumlahkan_total_bayar_penjualan.php',function(data) {
+			$('#tampilkan_total_bayar').html(data);
+		})
+	}
+
+
+ 	function ambilAngkaNotifikasi(){
+		$.get('Ajax/Ajax_notifikasi.php',function(data) {
+			$('#angka_notifikasi').html(data);
+		})
+	}
+
  	function cek_database(){
     var kode = $("#kode-barang").val();
                 $.ajax({

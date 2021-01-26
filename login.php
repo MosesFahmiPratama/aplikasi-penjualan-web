@@ -21,8 +21,8 @@
 	 		<input type="Password">
 
 	 		<div id="tombol-simpan">
-	 			<button type="submit">Simpan</button>
-	 			<button type="reset">Batal</button>
+	 			<button type="submit"><i class="fas fa-sign-in-alt"></i> Masuk</button>
+	 			<button type="reset"><i class="far fa-window-close"></i> Batal</button>
 	 		</div>
  		</form>
  	</div>

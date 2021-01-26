@@ -51,40 +51,19 @@
  			</div>
  			<!-- batas menu notifikasi -->
  			<div class="form-input">
- 				<form action="" class="form-input-penjualan">
+ 				<form action="Proses/proses-kategori.php" method="post" class="form-input-penjualan">
  					
  					<label>Jenis Barang</label>
- 					<input type="text">
+ 					<input type="text" name="nama-kategori">
  					
  					<div id="tombol-form">
- 						<button type="submit" name="simpan">Simpan</button>
- 						<button type="reset">Batal</button>
+ 						<button type="submit" onclick="TambahDataKategori()"><i class="fas fa-save"></i> Simpan</button>
+ 						<button type="reset"><i class="fas fa-times"></i>Batal</button>
  					</div>
  				</form>
  				
-	 			<div class="tabel">
-		 			<table width="400">
-			 				<thead>
-			 					<th>No</th>
-			 					<th>Kategori Barang</th>
-			 				</thead>
-			 				<tbody>
-			 					<?php 
-			 					include "koneksi.php";
-					            $no = 1;
-					            $kategori = mysqli_query($koneksi,"SELECT * FROM tbl_kategori");
-					            while($b = mysqli_fetch_array($kategori)){
-					           ?>
-					                <tr>
-					                    <td><?php echo $no++; ?></td>
-					                    <td><?php echo $b['nama_kategori']; ?></td>
-					                </tr>
-					            <?php 
-					            }
-					            ?>
-			 				</tbody>
-		 			</table>
-		 		</div>
+	 			<div id="tampilkan_data"></div>
+
  		</div>
  	</div>
  	<script type="text/javascript" src="aset/css/all.min.js"></script>
@@ -102,7 +81,28 @@
  		$('#tutup-notifikasi').click(function(){
  			$('#notifikasi').css('display','none')
  		})
+
+ 		loadDataKategori();
+
+ 		$('form').on('submit',function(e){
+			e.preventDefault();
+			$.ajax({
+				type: $(this).attr('method'),
+				url : $(this).attr('action'),
+				data: $(this).serialize(),
+				success:function(){
+					loadDataKategori();
+				}
+			})
+		})
  	})
+
+
+ 	function loadDataKategori(){
+		$.get('Ajax/proses/ajax_ambil_data_kategori.php',function(data) {
+			$('#tampilkan_data').html(data);
+		})
+	}
  </script>
  </body>
 </html>

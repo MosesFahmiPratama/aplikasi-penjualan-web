@@ -75,11 +75,11 @@
  			</div>
  			<!-- batas menu notifikasi -->
  			<div class="form-input">
- 				<form action="" class="form-input-penjualan">
+ 				<form action="Proses/proses-pembelian.php" method="post" class="form-input-penjualan">
  					<label>Tanggal</label>
  					<input type="date" name="tanggal">
  					<label>Kode Barang</label>
- 					<input type="text" value="<?php echo $kodeBarang ?>">
+ 					<input type="text" name="kode-barang" value="<?php echo $kodeBarang ?>">
  					<label>Nama Barang</label>
  					<input type="text" name="nama-barang">
  					<label>Kategori</label>
@@ -110,50 +110,15 @@
  					<input type="text" name="jumlah" onkeyup="hitung()" id="jumlah_beli">
  					<label>Total Harga Beli</label>
  					<input type="text" name="total" id="total_harga">
- 					<label>Bayar</label>
- 					<input type="text" id="bayar" onkeyup="hitung()">
- 					<label>Kembalian</label>
- 					<input type="text" id="Kembalian">
  					
  					<div id="tombol-form">
- 						<button type="submit" name="simpan">Simpan</button>
- 						<button type="reset">Batal</button>
+ 						<button type="submit" onclick="TambahDataPembelian()"><i class="fas fa-save"></i> Simpan</button>
+ 						<button type="reset"><i class="fas fa-times"></i> Batal</button>
  					</div>
  				</form>
  				
-	 			<div class="tabel">
-		 			<table>
-			 				<thead>
-			 					<th>Tanggal</th>
-			 					<th>Kode Barang</th>
-			 					<th>Nama Barang</th>
-			 					<th>Kategori</th>
-			 					<th>Kode Supplier</th>
-			 					<th>Harga Per Barang</th>
-			 					<th>Jumlah Beli</th>
-			 					<th>Total Harga</th>
-			 				</thead>
-			 				<tbody>
-			 					<?php 
-					            $pembelian = mysqli_query($koneksi,"SELECT * FROM tbl_pembelian ORDER BY id_pembelian ASC ");
-					            while($b = mysqli_fetch_array($pembelian)){
-					                ?>
-					                <tr>
-					                    <td><?php echo $b['tanggal']; ?></td>
-					                    <td><?php echo $b['kd_barang']; ?></td>
-					                    <td><?php echo $b['nm_barang']; ?></td>
-					                    <td><?php echo $b['kategori']; ?></td>
-					                    <td><?php echo $b['kd_supplier']; ?></td>
-					                    <td><?php echo "Rp. ".number_format($b['harga'])." ,-"; ?></td>
-					                    <td><?php echo $b['jumlah']; ?></td>
-					                    <td><?php echo $b['total_harga']; ?></td>
-					                </tr>
-					                <?php 
-					            }
-					            ?>
-			 				</tbody>
-		 			</table>
-		 		</div>
+		 		<div id="tampilkan_data"></div>
+
  		</div>
  	</div>
  	<script type="text/javascript" src="aset/css/all.min.js"></script>
@@ -171,7 +136,32 @@
  		$('#tutup-notifikasi').click(function(){
  			$('#notifikasi').css('display','none')
  		})
+
+ 		loadDataPembelian();
+
  	})
+
+ 	function TambahDataPembelian(){
+ 		$('form').on('submit',function(e){
+			e.preventDefault();
+			$.ajax({
+				type: $(this).attr('method'),
+				url : $(this).attr('action'),
+				data: $(this).serialize(),
+				success:function(tangkap_data){
+					var tampil_data = JSON.parse(tangkap_data);
+					alert(tampil_data.pesan);
+					loadDataPembelian();
+				}
+			})
+		})
+ 	}
+
+ 	function loadDataPembelian(){
+		$.get('Ajax/proses/ajax_ambil_data_pembelian.php',function(data) {
+			$('#tampilkan_data').html(data);
+		})
+	}
 
  	function hitung(){
  		var harga = $('#harga_per_barang').val();
@@ -180,7 +170,7 @@
  		$('#total_harga').val(hasil);
  		var bayar = $('#bayar').val();
  		kembalian = bayar - hasil;
- 		$('#Kembalian').val(kembalian);
+ 		$('#kembalian').val(kembalian);
  	}
  </script>
  </body>

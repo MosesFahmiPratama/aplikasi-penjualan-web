@@ -74,49 +74,25 @@
  			</div>
  			<!-- batas menu notifikasi -->
  			<div class="form-input">
- 				<form action="" class="form-input-penjualan">
+ 				<form action="Proses/proses-supplier.php" method="post" class="form-input-penjualan">
  					<label>Kode Supplier</label>
- 					<input type="text" value="<?php echo $kodeSupplier ?>">
+ 					<input type="text" name="kode-supplier" value="<?php echo $kodeSupplier ?>">
  					<label>Nama supplier</label>
- 					<input type="text">
+ 					<input type="text" name="nama-supplier">
  					<label>Alamat</label>
- 					<input type="text">
+ 					<input type="text" name="alamat">
  					<label>No.Telepon</label>
- 					<input type="text">
+ 					<input type="text" name="no-telepon">
  					
  					
  					<div id="tombol-form">
- 						<button type="submit" name="simpan">Simpan</button>
- 						<button type="reset">Batal</button>
+ 						<button type="submit" onclick="TambahDataSupplier()" name="simpan"><i class="fas fa-save"></i> Simpan</button>
+ 						<button type="reset"><i class="fas fa-times"></i> Batal</button>
  					</div>
 
  				</form>
  				
-	 			<div class="tabel">
-		 			<table>
-			 				<thead>
-			 					<th>Kode supplier</th>
-			 					<th>Nama Supplier</th>
-			 					<th>Alamat</th>
-			 					<th>No.Telepon</th>
-			 				</thead>
-			 				<tbody>
-			 					<?php 
-					            $supplier = mysqli_query($koneksi,"SELECT * FROM tbl_supplier");
-					            while($b = mysqli_fetch_array($supplier)){
-					           ?>
-					                <tr>
-					                    <td><?php echo $b['kd_supplier']; ?></td>
-					                    <td><?php echo $b['nama_supplier']; ?></td>
-					                    <td><?php echo $b['alamat']; ?></td>
-					                    <td><?php echo $b['no_telpon']; ?></td>
-					                </tr>
-					                <?php 
-					            }
-					            ?>
-			 				</tbody>
-		 			</table>
-		 		</div>
+	 			<div id="tampilkan_data"></div>
  		</div>
  	</div>
  	<script type="text/javascript" src="aset/css/all.min.js"></script>
@@ -134,7 +110,31 @@
  		$('#tutup-notifikasi').click(function(){
  			$('#notifikasi').css('display','none')
  		})
+
+ 		loadDataSupplier();
  	})
+
+ 	function TambahDataSupplier(){
+ 		$('form').on('submit',function(e){
+			e.preventDefault();
+			$.ajax({
+				type: $(this).attr('method'),
+				url : $(this).attr('action'),
+				data: $(this).serialize(),
+				success:function(tangkap_data){
+					var tampil_data = JSON.parse(tangkap_data);
+					alert(tampil_data.pesan);
+					loadDataSupplier();
+				}
+			})
+		})
+ 	}
+
+ 	function loadDataSupplier(){
+		$.get('Ajax/proses/ajax_ambil_data_supplier.php',function(data) {
+			$('#tampilkan_data').html(data);
+		})
+	}
  </script>
  </body>
 </html>
