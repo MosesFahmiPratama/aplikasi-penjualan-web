@@ -36,17 +36,19 @@ include '../koneksi.php';
           
           If($stock < $Jumlah)
           {
-            $validasi['pesan'] = 'Jumlah Stok tidak cukup untuk dijual. Sisa stock: '.$stock; 
+            $validasi['pesan'] = 'Jumlah Stok '.$NamaBarang.' tidak cukup untuk dijual. Sisa stock: '.$stock; 
             
           }else{
+
+             $validasi['pesan']= "Data Berhasil Masuk";
+
             $simpan = mysqli_query($koneksi,"INSERT INTO `tbl_penjualan` ( `tanggal_penjualan`, `kd_barang`, `nm_barang`, `kategori`, `harga`, `jumlah`, `total_harga`) VALUES ( '$Tanggal','$KodeBarang','$NamaBarang', '$Kategori','$Harga','$Jumlah','$Total')");
 
            $simpan .= mysqli_query($koneksi,"INSERT INTO `transaksi_penjualan` (`id_penjualan`, `tanggal_penjualan`, `kode_barang`, `nama_barang`, `kategori`, `harga`, `jumlah`, `total_harga`) VALUES (NULL, '$Tanggal','$KodeBarang','$NamaBarang', '$Kategori','$Harga','$Jumlah','$Total')");
-            if ($simpan) {
-              $validasi['pesan']="Data berhasil disimpan";
-            }
           }
         }
+            
+        
         
         echo json_encode($validasi);
 ?>

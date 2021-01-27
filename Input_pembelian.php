@@ -43,7 +43,7 @@
  			<h1>Form Pembelian</h1>
  			<nav>
  				<ul>
- 					<li id="tombol-notifikasi"><a href="#"><i class="fas fa-bell"></i></a></li>
+ 					<li id="tombol-notifikasi"><i class="fas fa-bell"></i><b id="angka_notifikasi"></b></li>
  					<li><a href="#"><i class="fas fa-cog"></i></a></li>
  					<li><a href="#"><i class="fas fa-sign-out-alt"></i></a></li>
  				</ul>
@@ -52,16 +52,27 @@
  		</div>
  		<div class="sidebar">
  			<div class="tombol-menu"><i class="fas fa-times"></i></div>
- 			<ul>
+ 			<ul class="jarak">
  				<span><h3>ADmin</h3></span>
- 				<li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
-				<li><a href="#"><i class="fas fa-table"></i> Data Penjualan</a></li>
-				<li><a href="#"><i class="fas fa-table"></i> Data Pembelian</a></li>
-				<li><a href="#"><i class="fas fa-database"></i> Data Stok Barang</a></li>
-				<li><a href="#"><i class="fas fa-chart-line"></i> Grafik Penjualan</a></li>
-				<li><a href="#"><i class="fas fa-chart-line"></i> Grafik Pembelian</a></li>
-				<li><a href="#"><i class="fas fa-keyboard"></i> Input Pembelian</a></li>
-				<li><a href="#"><i class="fas fa-keyboard"></i> Input Penjualan</a></li>
+ 				<li><a href="Dashboard.php" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+				<li id="data1"><a href="#"><i class="fas fa-table"></i> Data</a></li>
+				<ul id="dropdown-sidebar1">
+					<li><a href="Data_stok.php">Data Barang</a></li>
+					<li><a href="Data_penjualan.php">Data Penjualan</a></li>
+					<li><a href="Data_pembelian.php">Data Pembelian</a></li>
+				</ul>
+				<li id="data2"><a href="#"><i class="fas fa-chart-line"></i> Grafik</a></li>
+				<ul id="dropdown-sidebar2">
+					<li><a href="#">Grafik Pembelian</a></li>
+					<li><a href="#">Grafik Penjualan</a></li>
+				</ul>
+				<li id="data3"><a href="#"><i class="fas fa-keyboard"></i> Form Input</a></li>
+				<ul id="dropdown-sidebar3">
+					<li><a href="Input_pembelian.php">Input Pembelian</a></li>
+					<li><a href="Input_penjualan.php">Input Penjualan</a></li>
+					<li><a href="Input_supplier.php">Input Supplier</a></li>
+					<li><a href="Input_kategori.php">Input Kategori</a></li>
+				</ul>
  			</ul>
  		</div>
  		<div class="konten">
@@ -137,9 +148,27 @@
  			$('#notifikasi').css('display','none')
  		})
 
+ 		$('#data1').click(function(){
+ 			$('#dropdown-sidebar1').toggle('slow');
+ 		});
+ 		$('#data2').click(function(){
+ 			$('#dropdown-sidebar2').toggle('slow');
+ 		});
+ 		$('#data3').click(function(){
+ 			$('#dropdown-sidebar3').toggle('slow');
+ 		});
+
+ 		ambilAngkaNotifikasi();
+
  		loadDataPembelian();
 
  	})
+
+ 	function ambilAngkaNotifikasi(){
+		$.get('Ajax/Ajax_notifikasi.php',function(data) {
+			$('#angka_notifikasi').html(data);
+			})
+	}
 
  	function TambahDataPembelian(){
  		$('form').on('submit',function(e){
@@ -160,6 +189,16 @@
  	function loadDataPembelian(){
 		$.get('Ajax/proses/ajax_ambil_data_pembelian.php',function(data) {
 			$('#tampilkan_data').html(data);
+			$('.hapus-data').click(function(e){
+				e.preventDefault();
+				$.ajax({
+					type: 'GET',
+					url : $(this).attr('href'),
+					success:function(){
+						loadDataPembelian();
+					}
+				});
+			})
 		})
 	}
 

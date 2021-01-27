@@ -12,6 +12,7 @@ include "../../koneksi.php";
 				<th>Harga Per Barang</th>
 				<th>Jumlah Beli</th>
 				<th>Total Harga</th>
+				<th>Aksi</th>
 			</thead>
 			<tbody>
 			<?php 
@@ -39,13 +40,15 @@ include "../../koneksi.php";
 		            <td><?php echo "Rp. ".number_format($tampil['harga'])." ,-"; ?></td>
 		            <td><?php echo $tampil['jumlah']; ?></td>
 		            <td><?php echo $tampil['total_harga']; ?></td>
+		            <td><a class="hapus-data" href=Proses/proses_hapus_data_pembelian.php?data-id=<?php echo $tampil['id_pembelian']; ?>>Hapus</a></td>
 		        </tr>
 		    <?php 
 		    }
 		    ?>
 			</tbody>
 		</table>
-		<nav>
+</div>
+		<nav class="pagination">
 		   <ul>
 		       <li>
 		           <a <?php if ($page > 1) {echo "href='?halaman=$sebelum'";} ?>> < </a>
@@ -62,4 +65,4 @@ include "../../koneksi.php";
 		       </li>
 		   </ul>
 		</nav>
-	</div>
+	

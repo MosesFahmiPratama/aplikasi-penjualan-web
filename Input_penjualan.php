@@ -28,16 +28,27 @@
  		</div>
  		<div class="sidebar">
  			<div class="tombol-menu"><i class="fas fa-times"></i></div>
- 			<ul>
+ 			<ul class="jarak">
  				<span><h3>ADmin</h3></span>
- 				<li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
-				<li><a href="#"><i class="fas fa-table"></i> Data Penjualan</a></li>
-				<li><a href="#"><i class="fas fa-table"></i> Data Pembelian</a></li>
-				<li><a href="#"><i class="fas fa-database"></i> Data Stok Barang</a></li>
-				<li><a href="#"><i class="fas fa-chart-line"></i> Grafik Penjualan</a></li>
-				<li><a href="#"><i class="fas fa-chart-line"></i> Grafik Pembelian</a></li>
-				<li><a href="#"><i class="fas fa-keyboard"></i> Input Pembelian</a></li>
-				<li><a href="#"><i class="fas fa-keyboard"></i> Input Penjualan</a></li>
+ 				<li><a href="Dashboard.php" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+				<li id="data1"><a href="#"><i class="fas fa-table"></i> Data</a></li>
+				<ul id="dropdown-sidebar1">
+					<li><a href="Data_stok.php">Data Barang</a></li>
+					<li><a href="Data_penjualan.php">Data Penjualan</a></li>
+					<li><a href="Data_pembelian.php">Data Pembelian</a></li>
+				</ul>
+				<li id="data2"><a href="#"><i class="fas fa-chart-line"></i> Grafik</a></li>
+				<ul id="dropdown-sidebar2">
+					<li><a href="#">Grafik Pembelian</a></li>
+					<li><a href="#">Grafik Penjualan</a></li>
+				</ul>
+				<li id="data3"><a href="#"><i class="fas fa-keyboard"></i> Form Input</a></li>
+				<ul id="dropdown-sidebar3">
+					<li><a href="Input_pembelian.php">Input Pembelian</a></li>
+					<li><a href="Input_penjualan.php">Input Penjualan</a></li>
+					<li><a href="Input_supplier.php">Input Supplier</a></li>
+					<li><a href="Input_kategori.php">Input Kategori</a></li>
+				</ul>
  			</ul>
  		</div>
  		<div class="konten">
@@ -79,7 +90,7 @@
  					<input type="text" name="total_jual" id="total_harga">
  					
  					<div id="tombol-form">
- 						<button type="submit" onclick="TambahDataPenjualan()"><i class="fas fa-save"></i> Simpan</button>
+ 						<button type="submit"><i class="fas fa-save"></i> Simpan</button>
  						<button type="reset"><i class="fas fa-times"></i> Batal</button>
  					</div>
 
@@ -87,13 +98,9 @@
  					<h4 id="tampilkan_total_bayar"></h4></p>
  				</form>
  				
-	 			<div class="tabel">
-	 				<a class="hapus-transaksi-penjualan" href="Proses/hapus-transaksi-penjualan.php" onclick="return confirm('Apakah anda yakin mau menghapus data ini?')">Hapus</a>
-		 			
 		 			<!-- Tampilkan data setelah diinput dan diproses melalui ajax -->
 		 			<div id="tampilkan_data"></div>
 
-		 		</div>
  		</div>
  	</div>
  	<script type="text/javascript" src="aset/css/all.min.js"></script>
@@ -112,14 +119,22 @@
  			$('#notifikasi').css('display','none')
  		})
 
+ 		$('#data1').click(function(){
+ 			$('#dropdown-sidebar1').toggle('slow');
+ 		});
+ 		$('#data2').click(function(){
+ 			$('#dropdown-sidebar2').toggle('slow');
+ 		});
+ 		$('#data3').click(function(){
+ 			$('#dropdown-sidebar3').toggle('slow');
+ 		});
+
  		ambilAngkaNotifikasi();
 
  		TotalBayarPenjualan();
 
- 		loadDataPenjualan();
+ 		loadDataTransaksiPenjualan();
 
- 	})
- 	function TambahDataPenjualan(){
  		$('form').on('submit',function(e){
 			e.preventDefault();
 			$.ajax({
@@ -129,16 +144,27 @@
 				success:function(tangkap_data){
 					var tampil_data = JSON.parse(tangkap_data);
 					alert(tampil_data.pesan);
-					loadDataPenjualan();
+					loadDataTransaksiPenjualan();
 					TotalBayarPenjualan();
 				}
 			})
 		})
- 	}
 
- 	function loadDataPenjualan(){
-		$.get('Ajax/proses/ajax_ambil_data_penjualan.php',function(data) {
+ 	})
+
+ 	function loadDataTransaksiPenjualan(){
+		$.get('Ajax/proses/ajax_ambil_data_transaksi_penjualan.php',function(data) {
 			$('#tampilkan_data').html(data);
+			$('.hapus-transaksi-penjualan').click(function(e){
+				e.preventDefault();
+				$.ajax({
+					type: 'GET',
+					url : $(this).attr('href'),
+					success:function(){
+						loadDataTransaksiPenjualan();
+					}
+				});
+			})
 		})
 	}
 

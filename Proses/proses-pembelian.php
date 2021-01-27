@@ -31,11 +31,14 @@ $validasi['pesan']= "";
         }else {
 			$simpan = mysqli_query($koneksi,"INSERT INTO `tbl_pembelian` (`id_pembelian`, `tanggal`, `kd_barang`, `nm_barang`, `kategori`, `kd_supplier`, `harga`, `jumlah`, `total_harga`,`jual`) VALUES (NULL, '$Tanggal','$KodeBarang','$NamaBarang', '$Kategori','$KodeSupplier','$Harga','$Jumlah','$Total','$Jual')");
 
-    			if ($simpan) {
-    			  $validasi['pesan']= "Data Berhasil Masuk";
-    			}else{
-    			  $validasi['pesan']= "Data Gagal Masuk";
-    			}
+          // if ($simpan) {
+            $validasi['pesan']= "Data Berhasil Masuk";
+            
+          //   return false;
+          // }else{
+          //   $validasi['pesan']= "Data Gagal Masuk";
+          //   return false;
+          // }
     		}
 
         echo json_encode($validasi);

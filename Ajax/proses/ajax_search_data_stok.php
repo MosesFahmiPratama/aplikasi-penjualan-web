@@ -45,7 +45,8 @@
                 ?>
     </tbody>
 </table>
-  <nav>
+</div>
+  <nav class="pagination">
      <ul>
          <li>
              <a  <?php if ($page > 1) {echo "href='?halaman=$sebelum'";} ?>> < </a>
@@ -61,4 +62,4 @@
          </li>
      </ul>
  </nav>  
-</div>
+
